@@ -1,60 +1,83 @@
-# 局域网文件大厅
+# LAN File Hall
 
-Windows 10 / 11 x64 桌面 App。双方安装并打开后，自动发现同一局域网里的电脑，在一个大厅显示所有在线电脑发布的文件。
+A Windows 10 / 11 x64 desktop app for sharing files, folders, and text messages over a local network. Install and open the app on each computer to discover nearby devices and see everything they have published in one shared file hall.
 
-[下载最新版 Windows 安装包](https://github.com/ArthurYang88/lan-file-hall/releases/latest)
+[Download the latest Windows package](https://github.com/ArthurYang88/lan-file-hall/releases/latest)
 
-## 使用
+The current app interface is in Chinese. Control names in this guide are English translations of their labels.
 
-1. 每台电脑解压 `LanFileHall-Windows-x64-v1.3.zip`，双击 `Install.cmd`。安装到当前用户目录，并创建桌面和开始菜单快捷方式，无需管理员权限。也可以直接运行 `LanFileHall.exe`。更新时先关闭旧版。
-2. 打开桌面的 `LAN File Hall`。Windows 防火墙提示时，允许当前局域网所在网络配置的访问（家庭或办公室通常为专用网络）。安装脚本不会修改防火墙设置。
-3. 点击“发布文件”或“发布文件夹”，也可以将多个文件和文件夹一起拖入窗口。文件夹直接发布，无需压缩为 ZIP。
-4. 所有电脑的文件会汇总显示，通常在 5–10 秒内更新。选中别人发布的文件，点击“下载选中文件”；无需发送方确认。
-5. 点击“打开下载文件夹”查看已下载文件，默认位置为 `%USERPROFILE%\Downloads\局域网文件大厅`。同名文件自动加序号，不覆盖已有文件。
+## Getting started
 
-发布只登记原文件的位置，不会复制到下载文件夹。原文件需要保留在原位置。下载的文件不会自动重新发布。未完成的下载暂存为 `.partial` 文件，取消或正常关闭时清理；完成后才使用正式文件名。
+1. Extract `LanFileHall-Windows-x64-v1.3.zip` on each computer and double-click `Install.cmd`. The installer runs without administrator privileges, installs into the current user's directory, and creates desktop and Start menu shortcuts. You can also run `LanFileHall.exe` directly. Close the previous version before updating.
+2. Open the `LAN File Hall` desktop shortcut. If Windows Firewall prompts you, allow access for the network profile used by your local network, usually a private network at home or in an office. The installer does not change firewall settings.
+3. Click **Publish Files** or **Publish Folder**, or drag multiple files and folders into the window. Folders can be published directly without creating a ZIP archive.
+4. Published items from all online computers appear in the file hall, usually within 5–10 seconds. Select another computer's items and click **Download Selected Files**. The sender does not need to approve each download.
+5. Click **Open Download Folder** to find your downloads. They are saved in the app's dedicated folder under `%USERPROFILE%\Downloads`. Duplicate names receive a numeric suffix instead of overwriting existing items.
 
-文件夹在大厅显示为一个条目，大小栏标记“文件夹”。下载时逐个传输内部文件，在专用下载文件夹中恢复原目录结构，保留空文件夹和文件修改时间。同名文件夹自动加序号，不合并、不覆盖。未完成的文件夹暂存于 `.partial` 临时目录，完成后才显示为正式文件夹，取消或失败时清理。双方均需使用 v1.2 或更新版本才能传输文件夹。
+Publishing records the original file or folder's location. Keep the source at that location while sharing it. Publishing does not copy items into your download folder, and downloads are not automatically published. Incomplete downloads use temporary `.partial` files, which are removed when canceled or when the app closes normally. Completed downloads receive their final names.
 
-文件夹下载使用下载开始时的目录列表；请在传输期间保留源文件。符号链接、目录联接及其他重解析点不会跟随传输，避免把共享目录外的内容带入。无法读取内部文件时，下载失败并显示错误。单个文件夹目前最多包含 50,000 个文件及子目录。
+## Sharing folders
 
-## 文字消息
+A published folder appears as a single item, with **Folder** shown in the size column. Downloading transfers its files individually and reconstructs the directory structure, including empty folders and file modification times. A duplicate folder name receives a numeric suffix; existing folders are not merged or overwritten.
 
-打开“文字消息”标签，在“发送给”中选择在线电脑，输入文字后点“发送”，或按 Ctrl+Enter。Enter 可以换行。收到消息时标签显示未读数量；打开标签可查看消息。双方均需使用 v1.3 或更新版本，且同时在线。
+An incomplete folder download stays in a temporary `.partial` directory. The app gives it its final name only after the entire transfer succeeds, and removes the temporary directory if the download is canceled or fails. Both computers need v1.2 or later to transfer folders.
 
-收到及发出的消息都会出现在列表里，选中后显示全文。点击“复制消息”复制整条原文，也可在全文区选择部分文字后按 Ctrl+C。中文、多行、空格及换行均按原文发送。发送端在对方 App 确认接收后显示“已送达”，此状态不代表对方已经阅读；未确认送达时保留输入文字供重试。
+Folder downloads use a directory listing captured when the download begins. Keep source files available during the transfer. Symbolic links, directory junctions, and other reparse points are skipped to avoid including content outside the published folder. If an internal file cannot be read, the download fails and displays an error. A single folder currently supports up to 50,000 files and subdirectories in total.
 
-消息在局域网内直接传输，无需账户或配对。消息记录只保存在当前运行会话中，最近保留 500 条，每条最多 32,000 个字符；关闭 App 后清空。暂不支持离线消息。
+## Text messages
 
-关闭窗口即退出并停止共享；其他电脑会在约 16 秒内移除该电脑的文件。下次启动恢复发布列表，并将之前发布的文件放入默认折叠的“上次上传”分组；本次新发布的文件放在“本次上传”。分组仅影响展示，展开后仍可正常选择和下载。“取消发布”只撤下条目，不删除原文件；已经开始的下载可以继续完成。
+Open the **Text Messages** tab, select an online computer in **Send To**, enter your text, and click **Send** or press Ctrl+Enter. Enter inserts a new line. The tab shows an unread count when messages arrive. Both computers must be online and running v1.3 or later.
 
-文件列表使用 Windows 标准选择方式：单击单选、Ctrl+单击增减选择、Shift+单击连续选择、Ctrl+A 选择已展开分组中的全部文件。自动刷新保留选择和分组展开状态。多选后可批量下载或取消发布；混合选择时，下载只处理其他电脑的文件，取消发布只处理本机文件。批量下载依次执行，单个失败后继续其他文件，“取消下载”停止整个队列。
+Sent and received messages appear in the message list. Select a message to view its full text. Click **Copy Message** to copy the entire original message, or select part of the text and press Ctrl+C. Unicode characters, multiple lines, spaces, and line breaks are preserved.
 
-## 连接范围
+The sender sees **Delivered** after the recipient's app acknowledges receipt. This does not indicate that the recipient has read the message. If delivery is unconfirmed, the app keeps the input text so you can retry.
 
-同一局域网中的设备无需账户或配对即可浏览、下载主动发布的文件。使用 UDP 45831 广播发现和动态 TCP 端口传输。不使用云端，也不自动配置路由器端口映射。网络传输为明文 HTTP。
+Messages travel directly over the local network without accounts or pairing. History is kept only for the current app session, with the most recent 500 messages retained. Each message can contain up to 32,000 characters. Closing the app clears its message history. Offline messaging is not supported.
 
-如果看不到另一台电脑：确认双方 App 已打开、同一网络可互访、防火墙已允许 App 入站；访客 Wi-Fi、AP 隔离、VPN 或跨子网网络可能阻挡发现。
+## Selection and previous uploads
 
-## 第一版范围
+Closing the window exits the app and stops sharing. Other computers remove its items after about 16 seconds. On the next launch, previous publications return under the **Previous Uploads** group, which starts collapsed. New publications appear under **Current Uploads**. Expanding a group lets you select and download its items normally.
 
-- 支持所有人文件列表、文件名/电脑名称搜索、我的发布筛选。
-- 支持文件和文件夹直接发布、拖放发布、批量下载、进度显示和取消。
-- 支持在线电脑间的文字消息、送达确认、消息全文和一键复制。
-- 暂不支持断点续传、开机启动。
-- 没有后台服务器；发布方退出后，尚未下载的文件无法获取。
+**Unpublish** removes an item from the hall without deleting its source. Transfers that have already started may still finish.
 
-## 开发与验证
+The file list uses standard Windows selection:
 
-使用 .NET 8 WinForms，无第三方库依赖。
+- Click to select one item.
+- Ctrl+click to add or remove individual items from the selection.
+- Shift+click to select a continuous range.
+- Ctrl+A to select every item in expanded groups.
+
+Automatic refresh preserves selection and group expansion. Multiple selected items can be downloaded or unpublished together. With a mixed selection, downloading applies to other computers' items and unpublishing applies to your own items. Batch downloads run sequentially and continue if an individual item fails. **Cancel Download** stops the entire queue.
+
+## Network behavior
+
+Devices on the same local network can browse and download published items without accounts or pairing. Discovery uses UDP broadcasts on port 45831; transfers use a dynamically assigned TCP port. The app uses no cloud service and does not configure router port forwarding. Network traffic uses unencrypted HTTP.
+
+If another computer does not appear, confirm that both apps are open, the computers can reach each other, and the firewall allows inbound access to the app. Guest Wi-Fi, access point isolation, VPNs, or separate subnets may prevent discovery.
+
+## Features and limitations
+
+- A combined list of files and folders from online computers, with search by item or computer name and a filter for your own publications.
+- Direct file and folder publishing, drag and drop, batch downloads, progress, and cancellation.
+- Text messages between online computers, delivery acknowledgments, full-text viewing, and copying.
+- Download resuming and automatic startup are not supported.
+- There is no background server. Items that have not yet been downloaded are unavailable while their publisher's app is closed.
+
+## Building and verification
+
+Built with .NET 8 WinForms, with no third-party library dependencies.
 
 ```powershell
 dotnet build -c Release
 dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o dist/app
 ```
 
-运行 `LanFileHall.exe --self-test` 执行独立临时目录中的两端集成测试，报告写入程序旁边的 `self-test-results.txt`。覆盖 UDP 发现、目录读取、3 MB 内容 SHA-256 一致性、空文件、重名处理、持久化、未发布文件访问限制、路径遍历、取消操作和大小变化检测，以及包含中文路径、嵌套目录和空目录的文件夹传输及取消清理。文字消息验证覆盖双向传输、中文多行原文、送达确认、最长消息、重复请求、无效内容及离线失败状态。测试使用本机网络，不能替代两台实体电脑上的网络测试。
+Run `LanFileHall.exe --self-test` to execute two-endpoint integration tests in an isolated temporary directory. Results are written to `self-test-results.txt` next to the executable.
 
-## 卸载
+Tests cover UDP discovery, catalog retrieval, SHA-256 verification of a 3 MB transfer, empty files, duplicate names, persistence, access restrictions for unpublished items, path traversal, cancellation, and file size changes. Folder tests cover Unicode paths, nested and empty directories, transfers, and temporary-directory cleanup. Message tests cover bidirectional delivery, exact Unicode and multiline text, delivery acknowledgments, maximum length, duplicate requests, invalid content, and offline failure states.
 
-关闭 App，删除 `%LOCALAPPDATA%\Programs\LanFileHall`，以及桌面和开始菜单的 `LAN File Hall` 快捷方式。设置保存在 `%LOCALAPPDATA%\LanFileHall`；下载文件夹单独保留，按需自行处理。
+These tests use networking on one computer and do not replace testing between two physical computers.
+
+## Uninstalling
+
+Close the app, delete `%LOCALAPPDATA%\Programs\LanFileHall`, and remove its desktop and Start menu shortcuts. Settings are stored in `%LOCALAPPDATA%\LanFileHall`. Downloaded files are kept separately; retain or remove them as needed.
